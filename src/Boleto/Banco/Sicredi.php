@@ -176,6 +176,16 @@ class Sicredi extends AbstractBoleto implements BoletoContract
         return $nossoNumero;
     }
     /**
+     * Retorna o Nosso Número.
+     *
+     * @return string
+     */
+    public function getNossoNumero()
+    {
+        return $this->numero;
+    }
+
+    /**
      * Método que retorna o nosso numero usado no boleto. alguns bancos possuem algumas diferenças.
      *
      * @return string
@@ -206,6 +216,23 @@ class Sicredi extends AbstractBoleto implements BoletoContract
         $campoLivre .= Util::modulo11($campoLivre);
 
         return $this->campoLivre .= $campoLivre;
+    }
+
+    public function setCodigoBarras($codigoBarras)
+    {
+        $this->campoCodigoBarras = $codigoBarras;
+        return $this;
+    }
+
+    public function setLinhaDigitavel($linhaDigitavel)
+    {
+
+        $str = substr($linhaDigitavel, 0, 5).'.'.substr($linhaDigitavel, 5, 5).' '.substr($linhaDigitavel, 10, 5);
+        $str .= '.'.substr($linhaDigitavel, 15, 6).' '.substr($linhaDigitavel, 21, 5).'.'.substr($linhaDigitavel, 26, 6);
+        $str .= ' '.substr($linhaDigitavel, 32, 1).' '.substr($linhaDigitavel, 33);
+
+        $this->campoLinhaDigitavel = $str;
+        return $this;    
     }
 
     /**
