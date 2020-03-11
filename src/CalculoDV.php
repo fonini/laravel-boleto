@@ -289,4 +289,37 @@ class CalculoDV
         }
         return  $dv;
     }
+
+    /**
+     * -------------------------------------------------------------------
+     * 136 - Unicred
+     * -------------------------------------------------------------------
+     */
+
+    public static function unicredCodigoBarra($numero)
+    {
+        $digitoVerificador = Util::modulo11($numero);
+        if ($digitoVerificador == 0 || $digitoVerificador > 9)
+            $digitoVerificador = 1;
+        return $digitoVerificador;
+    }
+
+    public static function unicredNossoNumero($numero)
+    {
+        $variavelParaOCalculo = Util::numberFormatGeral($numero, 10);
+        $constanteParaCalculo = '3298765432';
+
+        $soma = 0;
+        for ($contador = 0; $contador < 10; $contador++) {
+            $soma += $variavelParaOCalculo[$contador] * $constanteParaCalculo[$contador];
+        }
+
+        $restoDivisao = $soma % 11;
+
+        if ($restoDivisao == 1 || $restoDivisao == 0)
+            $digitoVerificador = 0;
+        else
+            $digitoVerificador = 11 - $restoDivisao;
+        return $digitoVerificador;
+    }
 }

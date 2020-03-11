@@ -19,7 +19,7 @@ class Sicredi extends AbstractBoleto implements BoletoContract
      *
      * @var string
      */
-    protected $localPagamento = 'Pagável preferencialmente nas cooperativas de crédito do sicredi';
+    protected $localPagamento = 'Pagável preferencialmente nas cooperativas de crédito do Sicredi';
     /**
      * Código do banco
      *
@@ -205,6 +205,7 @@ class Sicredi extends AbstractBoleto implements BoletoContract
             . CalculoDV::sicrediNossoNumero($this->getAgencia(), $this->getPosto(), $this->getCodigoCliente(), $ano, $byte, $numero_boleto);
         return $nossoNumero;
     }
+
     /**
      * Retorna o Nosso Número.
      *
