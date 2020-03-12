@@ -26,7 +26,7 @@ class Unicred extends AbstractBoleto implements BoletoContract
      *
      * @var string
      */
-    protected $localPagamento = 'Pagável Preferencialmente na Unicred';
+    protected $localPagamento = 'Pagável em qualquer agência bancária/correspondente bancário';
 
     /**
      * Código do banco
