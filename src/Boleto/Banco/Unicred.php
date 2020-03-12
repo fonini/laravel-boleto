@@ -12,9 +12,6 @@ use Eduardokum\LaravelBoleto\Util;
 
 class Unicred extends AbstractBoleto implements BoletoContract
 {
-
-    protected $codigoBanco = Boleto::COD_BANCO_UNICRED;
-
     /**
      * Trata-se de código utilizado para identificar mensagens especificas ao cedente, sendo
      * que o mesmo consta no cadastro do Banco, quando não houver código cadastrado preencher
@@ -30,6 +27,13 @@ class Unicred extends AbstractBoleto implements BoletoContract
      * @var string
      */
     protected $localPagamento = 'Pagável Preferencialmente na Unicred';
+
+    /**
+     * Código do banco
+     *
+     * @var string
+     */
+    protected $codigoBanco = self::COD_BANCO_UNICRED;
 
     /**
      * Define as carteiras disponíveis para este banco
