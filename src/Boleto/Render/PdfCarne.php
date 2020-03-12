@@ -199,7 +199,7 @@ class PdfCarne extends AbstractPdf implements PdfContract
         $this->Cell(3, -$this->desc - 1, $this->_('|  '));
         $this->SetFont($this->PadraoFont, 'B', $this->fcel);
         $this->Cell(160, $this->cell,
-            $this->_(trim('Endereço: ' . $enderecoPagador . ' - ' . $this->boleto[$i]->getPagador()->getBairro() . $this->boleto[$i]->getPagador()->getCepCidadeUf()),
+            $this->_(trim('Endereço: ' . $enderecoPagador . ' - ' . $this->boleto[$i]->getPagador()->getBairro() . ' - ' . $this->boleto[$i]->getPagador()->getCepCidadeUf()),
                 ' -'), 'BLR', 1);
         $sacado = $nomeDocumentoPagador;
         $sacado = explode(' ', $sacado);
