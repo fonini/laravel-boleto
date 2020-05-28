@@ -359,7 +359,7 @@ class Pdf extends AbstractPdf implements PdfContract
             $this->Ln(1);
             $this->SetFont($this->PadraoFont, 'B', $this->fcel);
 
-            $this->listaLinhas($this->boleto[$i]->getInstrucoes(), 0);
+            $this->listaLinhas($this->boleto[$i]->getInstrucoes(), 0, 115);
 
             $this->SetXY($xOriginal, $yOriginal);
         }
@@ -486,11 +486,11 @@ class Pdf extends AbstractPdf implements PdfContract
      *
      * @return int
      */
-    private function listaLinhas($lista, $pulaLinha)
+    private function listaLinhas($lista, $pulaLinha, $width = 0)
     {
         foreach ($lista as $d) {
             $pulaLinha -= 2;
-            $this->MultiCell(0, $this->cell - 0.2, $this->_(preg_replace('/(%)/', '%$1', $d)), 0, 1);
+            $this->MultiCell($width, $this->cell - 0.2, $this->_(preg_replace('/(%)/', '%$1', $d)), 0, 1);
         }
 
         return $pulaLinha;
