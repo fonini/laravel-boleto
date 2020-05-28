@@ -359,7 +359,7 @@ class Pdf extends AbstractPdf implements PdfContract
             $this->Ln(1);
             $this->SetFont($this->PadraoFont, 'B', $this->fcel);
 
-            $this->listaLinhas($this->boleto[$i]->getInstrucoes(), 0);
+            $this->listaLinhas($this->boleto[$i]->getInstrucoes(), 0, 115);
 
             $this->SetXY($xOriginal, $yOriginal);
         }
