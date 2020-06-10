@@ -87,6 +87,13 @@ class Sicredi extends AbstractBoleto implements BoletoContract
      */
     protected $byte = 2;
     /**
+     * Código do cliente (é código do cedente, também chamado de código do beneficiário) é o código do emissor junto ao banco, geralmente é o próprio número da conta sem o dígito verificador. 
+     * O código do cliente/cedente/beneficiário será diferente desse padrão em casos como quando um cliente bancário faz a migração da sua conta entre agências.
+     *
+     * @var string
+     */
+    protected $codigoCliente;
+    /**
      * Define se possui ou não registro
      *
      * @param  bool $registro
@@ -153,13 +160,35 @@ class Sicredi extends AbstractBoleto implements BoletoContract
         return $this->byte;
     }
     /**
+     * Seta o codigo do cliente.
+     *
+     * @param mixed $codigoCliente
+     *
+     * @return $this
+     */
+    public function setCodigoCliente($codigoCliente)
+    {
+        $this->codigoCliente = $codigoCliente;
+
+        return $this;
+    }
+    /**
+     * Retorna o codigo do cliente.
+     *
+     * @return string
+     */
+    public function getCodigoCliente()
+    {
+        return $this->codigoCliente;
+    }
+    /**
      * Retorna o campo Agência/Beneficiário do boleto
      *
      * @return string
      */
     public function getAgenciaCodigoBeneficiario()
     {
-        return sprintf('%04s.%02s.%05s', $this->getAgencia(), $this->getPosto(), $this->getConta());
+        return sprintf('%04s.%02s.%05s', $this->getAgencia(), $this->getPosto(), $this->getCodigoCliente());
     }
     /**
      * Gera o Nosso Número.
