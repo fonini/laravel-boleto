@@ -93,7 +93,6 @@ class Sicredi extends AbstractBoleto implements BoletoContract
      * @var string
      */
     protected $codigoCliente;
-
     /**
      * Define se possui ou não registro
      *
