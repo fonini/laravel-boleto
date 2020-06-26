@@ -1030,7 +1030,7 @@ final class Util
     /**
      * @return string
      */
-    public static getBanco($cod)
+    public static function getBanco($cod)
     {
         if (isset($this->bancos[$cod])){
             return $this->bancos[$cod];
