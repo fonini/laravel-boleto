@@ -101,6 +101,7 @@ final class Util
         '453' => 'Banco Rural S.A.',
         '422' => 'Banco 422 S.A.',
         '033' => 'Banco Santander (Brasil) S.A.',
+        '136' => 'Banco Sicoob',
         '749' => 'Banco Simples S.A.',
         '366' => 'Banco Société Générale Brasil S.A.',
         '637' => 'Banco Sofisa S.A.',
@@ -1024,5 +1025,17 @@ final class Util
             $appended .= " $string";
         }
         return trim($appended);
+    }
+
+    /**
+     * @return string
+     */
+    public static getBanco($cod)
+    {
+        if (isset($this->bancos[$cod])){
+            return $this->bancos[$cod];
+        }
+
+        throw new Exception('Banco não encontrado: '.$cod);
     }
 }
