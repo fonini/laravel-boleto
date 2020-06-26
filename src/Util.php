@@ -1032,10 +1032,10 @@ final class Util
      */
     public static function getBanco($cod)
     {
-        if (isset($this->bancos[$cod])){
-            return $this->bancos[$cod];
+        if (isset(self::$bancos[$cod])){
+            return self::$bancos[$cod];
         }
 
-        throw new Exception('Banco não encontrado: '.$cod);
+        throw new \Exception('Banco não encontrado: '.$cod);
     }
 }
