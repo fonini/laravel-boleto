@@ -97,6 +97,17 @@ class Caixa  extends AbstractBoleto implements BoletoContract
         $numero = $carteira . Util::numberFormatGeral($numero_boleto, 15);
         return $numero;
     }
+
+    /**
+     * Retorna o Nosso Número.
+     *
+     * @return string
+     */
+    public function getNossoNumero()
+    {
+        return $this->numero;
+    }
+    
     /**
      * Método que retorna o nosso numero usado no boleto. alguns bancos possuem algumas diferenças.
      *
@@ -133,6 +144,23 @@ class Caixa  extends AbstractBoleto implements BoletoContract
         $baixaAutomatica = (int) $baixaAutomatica;
         $this->diasBaixaAutomatica = $baixaAutomatica > 0 ? $baixaAutomatica : 0;
         return $this;
+    }
+
+    public function setCodigoBarras($codigoBarras)
+    {
+        $this->campoCodigoBarras = $codigoBarras;
+        return $this;
+    }
+
+    public function setLinhaDigitavel($linhaDigitavel)
+    {
+
+        $str = substr($linhaDigitavel, 0, 5).'.'.substr($linhaDigitavel, 5, 5).' '.substr($linhaDigitavel, 10, 5);
+        $str .= '.'.substr($linhaDigitavel, 15, 6).' '.substr($linhaDigitavel, 21, 5).'.'.substr($linhaDigitavel, 26, 6);
+        $str .= ' '.substr($linhaDigitavel, 32, 1).' '.substr($linhaDigitavel, 33);
+
+        $this->campoLinhaDigitavel = $str;
+        return $this;    
     }
 
     /**
