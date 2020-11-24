@@ -59,6 +59,15 @@ class Bancoob extends AbstractBoleto implements BoletoContract
         //Equivalente no CNAB400 que não existe no CNAB240
         'W'   => '100',  //Warrant CNAB400
     ];
+
+     /**
+     * Código do cliente (é código do cedente, também chamado de código do beneficiário) é o código do emissor junto ao banco, geralmente é o próprio número da conta sem o dígito verificador. 
+     * O código do cliente/cedente/beneficiário será diferente desse padrão em casos como quando um cliente bancário faz a migração da sua conta entre agências.
+     *
+     * @var string
+     */
+    protected $codigoCliente;
+
     /**
      * Define o número do convênio (4, 6 ou 7 caracteres)
      *
@@ -103,8 +112,42 @@ class Bancoob extends AbstractBoleto implements BoletoContract
      */
     public function getNossoNumeroBoleto()
     {
-        return substr_replace($this->getNossoNumero(), '-', -1, 0);
+        return $this->getNossoNumero();
     }
+
+     /**
+     * Retorna o Nosso Número.
+     *
+     * @return string
+     */
+    public function getNossoNumero()
+    {
+        return $this->numero;
+    }
+
+    /**
+     * Seta o codigo do cliente.
+     *
+     * @param mixed $codigoCliente
+     *
+     * @return $this
+     */
+    public function setCodigoCliente($codigoCliente)
+    {
+        $this->codigoCliente = $codigoCliente;
+
+        return $this;
+    }
+    /**
+     * Retorna o codigo do cliente.
+     *
+     * @return string
+     */
+    public function getCodigoCliente()
+    {
+        return $this->codigoCliente;
+    }
+
     /**
      * Método para gerar o código da posição de 20 a 44
      *
@@ -127,6 +170,23 @@ class Bancoob extends AbstractBoleto implements BoletoContract
         $campoLivre .= Util::numberFormatGeral(1, 3); //Numero da parcela - Não implementado
 
         return $this->campoLivre = $campoLivre;
+    }
+
+    public function setCodigoBarras($codigoBarras)
+    {
+        $this->campoCodigoBarras = $codigoBarras;
+        return $this;
+    }
+
+    public function setLinhaDigitavel($linhaDigitavel)
+    {
+
+        $str = substr($linhaDigitavel, 0, 5).'.'.substr($linhaDigitavel, 5, 5).' '.substr($linhaDigitavel, 10, 5);
+        $str .= '.'.substr($linhaDigitavel, 15, 6).' '.substr($linhaDigitavel, 21, 5).'.'.substr($linhaDigitavel, 26, 6);
+        $str .= ' '.substr($linhaDigitavel, 32, 1).' '.substr($linhaDigitavel, 33);
+
+        $this->campoLinhaDigitavel = $str;
+        return $this;
     }
 
     /**
@@ -161,7 +221,7 @@ class Bancoob extends AbstractBoleto implements BoletoContract
      * @return string
      */
     public function getAgenciaCodigoBeneficiario(){
-        return $this->getAgencia() . ' / ' . $this->getConvenio();
+        return $this->getAgencia() . ' / ' . $this->getCodigoCliente();
     }
     
 }
